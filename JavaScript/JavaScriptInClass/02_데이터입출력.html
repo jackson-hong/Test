@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 입출력하기</title>
+</head>
+<body>
+    <h1>데이터 출력하기</h1>
+    <p>데이터를 출력하는 방법
+        브라우저에 출력 : document.write("값"), aleart("값");, element.innerHTML="값"
+        개발자도구에 출력 : console.log("값")
+        <!-- 자바스크립트에서는 태그가 객체다 -->
+    </p>
+    <div id="test"></div>
+    <script>
+        window.document.write("<h3>이건 스크립트가 추가한 내용</h3>");//함수를 호출한 것
+        document.write("태그가 없는 문구");
+        window.alert("JACKSON");
+        document.getElementById("test").innerHTML = "<img src='https://pds.joins.com/news/component/ilgan_isplus/201905/29/2019052918221395100.jpeg'>";//태그를 객체로 가져온 것
+        console.log(document.getElementById("test"));
+        console.error("주의 반장님이 수업을 안 들어요");
+        console.warn("배가배가 고파요");
+        console.warn(document);
+        console.table(document);
+        console.dir(document.getElementById("test"))
+    </script>
+
+    <h1>사용자에게 데이터 입력받기!</h1>
+    <p>
+        1. window 객체가 지원하는 함수를 이용
+            confirm(), prompt()
+        2. input 태그를 이용해서 입력받는 방법
+    </p>
+    <h3>window 함수 이용 입력</h3>
+    <script>
+        console.log(confirm("당신은 미성년자입니까?"));//반환 받는 값은 true/false 가 된다!
+        console.log(prompt("당신의 이름을 입력하세요!"));//입력한 데이터를 출력
+    </script>
+    <input type="text" name="name" id=""><button onclick="checkVal()">입력받기</button>
+    <script>
+        function checkVal(){
+            console.log(document.getElementsByTagName("input")[0].value);
+            
+
+        }
+    </script>
+</body>
+</html>
