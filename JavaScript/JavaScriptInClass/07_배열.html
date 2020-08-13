@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열활용하기</title>
+</head>
+<body>
+    <h3>배열을 선언하고 활용해보자</h3>
+    <p>
+        자바스크립트에서 배열은 자바의 컬렉션과 유사함
+        자바스크립트의 배열을 특정자료형에 한정하지 않고
+        모든 자료형을 저장할 수 있음.
+    </p>
+    <script>
+        //배열 선언하기
+        //1. []이용하는 방법 : var test = [값,값,값]; var test = [];*자료형은 상관없음.
+        //2. Array객체를 이용하는 방법 : var test = new Array(값,값,값);
+        var arr = [];
+        // var arr1;
+        console.log(arr.length);
+        //선언과 동시에 초기화해서 사용하기
+        var arr1 = ['유병승','온영석','강범석'];
+        //배열에는 여러가지 자료형이 들어갈 수 있음
+        arr1=['유병승', 19, 180.5, {name:"hoho", size:20}, function(){
+            alert('배열안의 함수')}, [1,2,3,4,5]]
+        console.log(arr1);
+        //배열 요소에 접근하기
+        //인덱스 번호로 접근하면 됨!
+        arr1[4](); //함수선언
+        //객체접근
+        console.log(arr1[3].name);
+        console.log(arr1[arr1.length-1][0]);
+        //선언배열에 값 넣기
+        arr[0]="이제 곧 수업 끝!";
+        arr[10] = 100;
+        console.log(arr.length);
+        console.log(arr[0]);
+        for(let i = 0; i < arr.length; i++){
+            console.log(arr[i]);
+        }
+    </script>
+</body>
+</html>
