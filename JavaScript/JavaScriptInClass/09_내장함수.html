@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내장함수 알아보기</title>
+</head>
+<body>
+    <h3>인코딩관련 내장함수</h3>
+    <p>인코딩, 디코딩관련 함수</p>
+    <p>네트워크상 정보 공유를 위해서 아스키코드, 유니코드값으로 데이터를 변경하는 것</p>
+    <p>
+        인코딩 / 디코딩은 mapping 되어있다. <br>
+        escape / unescape : 영문, 알파벳, 숫자, 일부 특수문자(@, *, -, ., /)를 제외한 모든문자를 인코딩<br>
+        encodeURI / decodeURI : escape에서 인터넷주소에 사용되는 일부 특수문자(: ; / = ? &)는 변환하지 않음 <br>
+        encodeURICOmponent / decodeURIComponent : 알파벳, 숫자를 제외한 모든 문자를 인코딩 (UTF-8 방식)
+    </p>
+    <button onclick="test();">실행하기</button>
+    <div id="area"></div>
+    <script>
+        function test(){
+            var URI = 'http://www.naver.com?test=한글입니다.';
+            var esEncode = escape(URI);
+            var encodeU = encodeURI(URI);
+            var enUCom = encodeURIComponent(URI);
+            var area = document.getElementById("area");
+
+            area.innerHTML += `원본내용 : ${URI}<br>`;
+            area.innerHTML += `escape : ${esEncode}<br>`;
+            area.innerHTML += `encodeURI : ${encodeU}<br>`;
+            area.innerHTML += `encodeURIComponent : ${enUCom}<br>`;
+            area.innerHTML += '<h1>decode 처리하기 </h1><br>';
+            area.innerHTML += `escape : ${unescape(esEncode)}<br>`;
+            area.innerHTML += `encodeURI : ${decodeURI(encodeU)}<br>`;
+            area.innerHTML += `encodeURIComponent : ${decodeURIConponent(enUCom)}<br>`;
+
+        }
+    </script>
+
+    <h3>eval() : 문자열로 작성된 js코드를 동적으로 변환해 주는 함수</h3>
+    숫자 입력 : <input type="text" id="num1">
+    숫자 입력 : <input type="text" id="num2">
+    <button onclick="test2();">실행</button>
+    <textarea name="tt" id="tt" cols="30" rows="10"></textarea>
+    <div id="area1"></div>
+    <script>
+        function test2(){
+            var temp = "";
+            temp += "var number1=document.getElementById('num1');";
+            temp += "var number2=document.getElementById('num2');";
+            temp += "var area = document.getElementById('area1');";
+            temp += "area.innerHTML = number1.value + number2.value;";
+            console.log(temp);
+            eval(temp);
+            var textVal = document.getElementById("tt").value;
+            console.log(textVal);
+            eval(textVal)
+        }
+    </script>
+
+    <h3>isNaN 함수</h3>
+    <p>NaN : Not a Number</p>
+    <script>
+        var su = 100;
+        var su2 = '백';
+        console.log(su-su2);
+    </script>
+    <h3>내장객체 Date</h3>
+    <p>자바스크립트에서 날짜를 처리하는 객체</p>
+    <div id="container">
+        <h1>현재시간 : <span id="time"></span></h1>
+    </div>
+
+    <script>
+        setInterval(()=>{
+            const time = new Date();
+            const timecontainer = document.querySelector('#container #time');
+            timecontainer.innerHTML = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+        },1000)
+        var date = new Date(); //오늘 날짜
+        date = new Date('08 12, 19');
+        console.log(date);
+        //날짜객체에서 년, 월, 일 출력하기
+        console.log(date.getFullYear());
+        console.log(date.getMonth()+1);
+        console.log(date.getDate());
+        console.log(date.getDay());//0:일, 1:월, ..., 6:토
+        console.log(date.getHours(), date.getMinutes(), date.getSeconds());
+    </script>
+</body>
+</html>

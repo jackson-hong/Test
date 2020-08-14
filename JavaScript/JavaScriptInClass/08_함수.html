@@ -12,5 +12,126 @@
         2. 익명함수 -> 이름이 없는 함수
         함수선언 : function[함수명](매개변수명,매개변수명,매개변수명,...){ 구현 }
     </p>
+    <h3>선언적함수</h3>
+    <script>
+        function testFunc(){
+            // alert("선언적 함수");
+        }
+        //함수를 실행하려면 호출
+        testFunc();
+        //매개변수 있는 선언적함수
+        function sum(num1, num2){
+            if(typeof(num1) == 'number' && typeof(num2) == 'number'){
+            console.log(num1, num2);
+            console.log(num1+num2);
+            }else {
+                console.log('숫자만 입력하세요.');
+            }
+        }
+        sum(100,100);
+        //매개변수에 갯수 맞지 않게 호출하기
+        sum(100);//구동이 됨.. 없는 매개변수는 undefined로 들어감
+        sum(100,'5'); //result = 1005(string) - 이런 경우 때문에 예외처리를 해줘야함
+        //정의된 매개변수보다 더 많은 매개변수를 보낸다면?
+        sum(1,2,34,5,6,23,2,3,5,53,4); //선언된 매개변수 이외에 전달된 매개변수는 무시
+        //전달된 매개변수는 자바스크립트 내장객체에 별도로 따로 보관
+        //arguments 객체에 매개변수 전체를 보관
+        function testArgument(name, age){
+            // console.log(`당신의 이름은 ${name}이고, 나이는 ${age}`);
+            console.log(arguments);
+            console.log(typeof(arguments));
+            // arguments.array.forEach(element => {
+            //     console.log(element);
+            // });
+            for(let k in arguments){
+                console.log(arguments[k]);
+            }
+            // Array.call(arguments).array.forEach(element => {
+            //     console.log(element);
+            // });
+        }
+        testArgument('유병승',19,'남','경기도 시흥시');
+    </script>
+
+    <h3>익명함수 활용하기</h3>
+    <p>익명함수는 재호출이 불가능, 익명함수를 변수에 넣으면 재호출이 가능
+        익명함수는 대부분 매개변수로 받는 함수호출시 사용 -> event처리할 때 자주 사용
+    </p>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        testDee(100,100);
+        // anno(100,100); 호이스팅에 의해 변수만 선언되기 때문에 컴퓨터는 메소드인지 모름 -> 오류
+
+        var anno = function(su, su2){
+            console.log(su+su2);
+        }
+        function testDee(su,su2){
+            console.log(su+su2)
+        }
+        //익명함수는 매개변수로 넣을 때 많이 사용하게 됨.
+        var lis = document.getElementsByTagName('li');
+        for (let index = 0; index < lis.length; index++) {
+                lis[index].addEventListener('click', function(){
+                    alert('click!');
+                });
+        }
+
+        function arguFunc(fun){
+            var result = fun('유병승', '천재');
+            console.log(result);
+        }
+
+        arguFunc(function(name, comment){
+            return name + comment;
+        })
+
+    </script>
+
+    <h3>함수 리턴값 받기</h3>
+    <script>
+        function notReturn(){
+            console.log('리턴없다!');
+            // return '실행했슈!';
+        }
+
+        function returnOn(){
+            return [1,2,3,4,5];
+        }
+
+        var return1 = notReturn();
+        console.log(return1);
+        var return1 = returnOn();
+        console.log(return1);
+    </script>
+
+    <h1>클로져 실습하기</h1>
+    <p>
+        함수안에서 사용한 지역변수를 외부에서 사용하기 수 있게 만드는 로직
+        익명함수를 return하여 지역변수를 활용할 수 있게 하는 것
+    </p>
+
+    <script>
+        function basicFunc(){
+            var name = prompt('이름입력');
+        }
+        //클로저를 이용하여 지역변수로 선언된 내용 확인하기
+        function closure(){
+            var name1 = prompt('이름입력');
+            return function(){
+                console.log(name1);
+            }
+        }
+        // basicFunc();
+        var name1 = closure();
+        name1();
+        name1();
+        name1();
+        name1();
+        console.dir(name1);
+    </script>
 </body>
 </html>
