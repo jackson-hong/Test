@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>배열 실습 문제1</h1>
+    <p>
+        다음 보기에 있는 데이터들은 배열로 받고 하느이 배열로 합쳐보세요. <br>
+        이때 입력 필드에 배열에 있는 데이터를 전솔하면 배열의 alert를 통하여 <br>
+        배열의 위치를 알려주고, 없으면 "존재하지 않습니다"를 알려주면 됩니다.
+    </p>
+    <fieldset>
+        <legend>보기</legend>
+        <p id="string">사과,바나나,당근<br/>김밥,치즈,떡볶이,햄버거<br/>환타,사이다,콜라<br/>고양이,강아지</p>
+    </fieldset>
+
+    <input type="text" id="input1">
+    <button onclick="func1();">전송 및 처리</button>
+
+    <script>
+        function func1(){
+            var string = document.getElementById('string').innerHTML;
+            var newString = string.split('<br>');
+            var arr = [];
+            for(let i = 0; i < newString.length; i++){
+                var newnewnew = newString[i].split(',');
+                for(let j = 0; j < newnewnew.length; j++){
+
+                    arr.push(newnewnew[j]);
+                }
+            }
+            var input = document.getElementById('input1').value;
+            alert(`${input}는 배열 index${arr.indexOf(`${input}`)}번째에 존재합니다`);
+            console.log(arr);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #output{
+            height: 15px;
+            border: 1px red solid;
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>보기</legend>
+        <p id="input">S B<br>e v o l</p></fieldset>
+        <br><br>
+    <div id="output"></div>
+    <button onclick="func1();">처리</button>
+    <script>
+        function func1(){
+            var arr = document.getElementById('input').innerHTML;
+            arr = arr.split('<br>')
+            var newnew1 = [];
+            var newnew2 = [];
+            for(let i = 0; i < arr.length; i++){
+                var temp = arr[i].split(' ');
+                if(i == 0){
+                for(let j = 0; j < temp.length; j++){
+                    newnew1.push(temp[j]);
+                }
+                }else {
+                    for(let j = 0; j < temp.length; j++){
+                    newnew2.push(temp[j]);
+                }
+                }
+            }
+            newnew1.reverse();
+            newnew2.reverse();
+            console.log(newnew1, newnew2);
+            var str = newnew1.join() + newnew2.join();
+            for(let i = 0 ; i < str.length; i++){
+            str = str.replace(',','');
+            }
+            document.getElementById('output').innerHTML = str;
+        }
+    </script>
+</body>
+</html>

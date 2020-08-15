@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #square{
+            width: 100px;
+            height: 100px;
+            border: 1px solid;
+        }
+        #square2 {
+            width: 100px;
+            height: 100px; 
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="square"></div>
+    <input type="color" id="color">
+    <button onclick="func1();">변경</button>
+    <div id="square2"></div>
+    <button id="x50" onclick='func2(50);'>50x50</button>
+    <button id="x100" onclick='func2(100);'>원본(100x100)</button>
+    <button id="x200" onclick='func2(200);'>200x200</button>
+    <script>
+        function func1(){   
+        var colorValue = document.getElementById('color').value;
+        console.log(colorValue);
+        document.getElementById('square').style.backgroundColor = colorValue;
+        }
+
+        function func2(scale){
+        document.getElementById('square2').style.width = `${scale}px`;
+        document.getElementById('square2').style.height = `${scale}px`;
+        }
+    </script>
+</body>
+</html>
