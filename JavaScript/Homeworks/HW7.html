@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+    <fieldset>
+        <legend>검색할 항목을 선택하세요.</legend>
+        <form id="newform">
+        <input type="radio" name="title" id="title" value="title">제목
+        <input type="radio" name="title" id="date" value="date">날짜
+        <input type="radio" name="title" id="writer" value="writer">작성자
+        </form>
+    </fieldset>
+    <div id="output"></div>
+    <script>
+        var newTitle = document.getElementsByName('title');
+        console.log(newTitle);
+        for(let i = 0; i < newTitle.length; i++){
+            if(newTitle[i].checked == true){
+                console.log(newTitle[i]);
+            }
+        }
+    </script>
+</div>
+</body>
+</html>
