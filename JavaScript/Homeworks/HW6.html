@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>
+        <legend>납품정보</legend>
+        <ul>
+            <li>상품명 : <select name="list" id="proName">
+                <option value="식품">식품</option>
+                <option value="신발">신발</option>
+                <option value="운동화">운동화</option>
+                <option value="아이패드">아이패드</option>
+            </select></li>
+            <li>납품수량 : <input type="text" name="" id="proQuan"></li>
+            <li>납품등급 : <input type="range" name="" id="grade" min="0" max="10" step="1"></li>
+            <li>기타사항 : <textarea name="" id="etc" cols="30" rows="10"></textarea></li>
+        </ul>
+    </fieldset>
+    <button onclick="func1();">send message</button>
+    <script>
+        function func1(){
+            var proName = document.getElementById('proName').value;
+            var proQuan = document.getElementById('proQuan').value;
+            var grade = document.getElementById('grade').value;
+            var etc = document.getElementById('etc').value;
+            confirm(`상품명 : ${proName}납품등급 : ${grade}
+            납품수량 : ${proQuan}
+            기타사항 : ${etc}
+            입력하신 내용이 맞습니까?`);
+        }
+    </script>
+</body>
+</html>

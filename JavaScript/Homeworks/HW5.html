@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #output {
+            width: 400px;
+            height: 200px;
+            background-color: rgba(255, 255, 0, 0.509);
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+        구매자 : <input type="text" name="userName" id="userName"><br><br>
+        상품명 : <input type="text" name="proName" id="proName"><br><br>
+        가격 : <input type="text" name="price" id="price">만원<br><br>
+        <button onclick="func1();">입력값 출력하기</button>
+    
+        <br><br>
+
+    <div id="output"></div>
+
+    <script>
+        function func1(){
+        var userName = document.getElementById('userName').value;
+        var proName = document.getElementById('proName').value;
+        var price = document.getElementById('price').value;
+        document.getElementById('output').innerHTML += `구입자 : ${userName}<br>구입상품 : ${proName}<br>구매가격 : ${price}`;
+        }
+    </script>
+</body>
+</html>
