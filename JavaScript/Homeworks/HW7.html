@@ -6,8 +6,27 @@
     <title>Document</title>
     <style>
         #wrapper {
+            width: 300px;
+            height: 100px;
+        }
+        #newform{
+            text-align: center;
+            
+        }
+        fieldset {
+            background-color: rgb(221, 221, 221);
+        }
+        #output {
             width: 600px;
-            height: 300px;
+            height: 500px;
+            border: 1px solid;
+            padding: 10px;
+        }
+        #inner {
+            padding: 10px;
+            width: 400px;
+            height: 200px;
+            background-color: burlywood;
         }
     </style>
 </head>
@@ -16,19 +35,31 @@
     <fieldset>
         <legend>검색할 항목을 선택하세요.</legend>
         <form id="newform">
-        <input type="radio" name="title" id="title" value="title">제목
-        <input type="radio" name="title" id="date" value="date">날짜
-        <input type="radio" name="title" id="writer" value="writer">작성자
+        <input type="radio" name="title" id="title" value="title" onclick="func1();">제목
+        <input type="radio" name="title" id="date" value="date" onclick="func2();">날짜
+        <input type="radio" name="title" id="writer" value="writer" onclick="func3();">작성자
         </form>
     </fieldset>
-    <div id="output"></div>
+    <div id="output">
+        <div id="inner">
+
+        </div>
+    </div>
     <script>
-        var newTitle = document.getElementsByName('title');
-        console.log(newTitle);
-        for(let i = 0; i < newTitle.length; i++){
-            if(newTitle[i].checked == true){
-                console.log(newTitle[i]);
-            }
+        
+        function func1(){
+            document.getElementById('inner').innerHTML = 
+            "검색할 제목을 입력하세요 : <br><input type='text'> <button>검색</button>";
+        }
+
+        function func2(){
+            document.getElementById('inner').innerHTML = 
+            "검색할 제목을 입력하세요 : <br><input type='date'> - <input type='date'> <button>검색</button>";
+        }
+
+        function func3(){
+            document.getElementById('inner').innerHTML = 
+            "검색할 작성자 아이디를 입력하세요 : <br><input type='text'> <button>검색</button>";
         }
     </script>
 </div>

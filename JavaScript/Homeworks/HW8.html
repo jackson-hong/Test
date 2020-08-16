@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper {
+            width: 530px;
+        }
+        table {
+            width: 530px;
+            padding: 0;
+            border-collapse: collapse;
+        }
+        td {
+            margin: 0;
+        }
+        
+        .left {
+            text-align:right;
+            color: orangered;
+            background-color: bisque;
+            padding-right: 5px;
+        }
+        .center {
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+    <h1 style="text-align:center;"><u>거래처 등록</u></h1>
+    <table border="1">
+        <tr>
+            <td class="left">거래처명</td>
+            <td> <input type="text" name="" id="" size="20px"> </td>
+        </tr>
+        <tr>
+            <td class="left">주소</td>
+            <td> <input type="text" name="" id="" size="40px"></td>
+        </tr>
+        <tr>
+            <td class="left">전화번호</td>
+            <td> <input type="text" name="" id="" size="15"></td>
+        </tr>
+        <tr>
+            <td class="left center">품명(중고품)</td>
+            <td>
+                <input type="checkbox" name="used" id="">메인보드
+                <input type="checkbox" name="used" id="">모니터
+                <input type="checkbox" name="used" id="">프린터
+                <input type="checkbox" name="used" id="">하드디스크
+                <input type="checkbox" name="used" id="">메모리
+                <input type="checkbox" name="used" id="">CPU
+            </td>
+        </tr>
+        <tr>
+            <td class="left center"><label for="push"><small><i style="color: blue;">모두선택/해제</i></small></label><input type="checkbox" name="push" id="push" onclick="func1();"> <br>
+                품명(수입산)</td>
+            <td>
+                <input type="checkbox" name="newnew" id="">메인보드
+                <input type="checkbox" name="newnew" id="">모니터
+                <input type="checkbox" name="newnew" id="">프린터
+                <input type="checkbox" name="newnew" id="">하드디스크
+                <input type="checkbox" name="newnew" id="">메모리
+                <input type="checkbox" name="newnew" id="">CPU
+            </td>
+        </tr>
+        <tr style="height: 50px;">
+            <td colspan="2" style="text-align: center;"><button>등록</button> <button>취소</button></td>
+        </tr>
+    </table>
+</div>
+<script>
+    function func1() {
+        var push = document.getElementById('push');
+
+        if(push.checked){
+            var list = document.getElementsByName('newnew');
+            for(let i = 0; i < list.length; i++){
+                list[i].checked = true;
+            }
+        }else {
+            var list = document.getElementsByName('newnew');
+            for(let i = 0; i < list.length; i++){
+                list[i].checked = false;
+            }
+        }
+    }
+</script>
+</body>
+</html>
