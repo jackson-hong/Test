@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>윈도우 함수 이용하기</title>
+    </head>
+    <body>
+        <h1>윈도우 객체 알아보기</h1>
+        <script>
+            // console.log(this);
+        </script>
+
+        <h2>윈도우창 새로 만들기</h2>
+        <p>open()함수를 이용해서 윈도우창을 새로 만듬</p>
+        <button onclick="newWindow2();">window</button>
+        <div id="container"></div>
+        <script>
+
+            function newWindow() {
+                window.open("http://naver.com", "_blank", "width=200, height=200");
+                //새로 생성된 윈도우 객체를 반환함.
+            }
+            function newWindow2() {
+                var child = open("", "_blank", "width=400, height=300");
+                console.log(child);
+                let script = '<script>';
+                script+="function sendData(){";
+                script+="var con = opener.document.getElementById('container');";
+                script+="var value = document.getElementById('data').value;";
+                script+="con.innerHTML = '<h2>' + value + '</h2>';}";
+                script+="</";
+                script+="script>";
+                child
+                    .document
+                    .write(
+                        "<html><body><h2>부모창에서 작성한 내용</h2><input id = 'data' type = 'type'><button onclick='sendData();'>데이터전송</button>"+script+"</body></html>"
+                    );
+                console.log();
+            }
+        </script>
+        <h1>setTimeout(), setInterval()</h1>
+        <p>
+            setTimeout() : 일정시간 후 함수를 한번 실행한다
+            setInterval() : 일정시간 후 함수를 지속적으로 실행하는 것
+        </p>
+        <button onclick="setTimeoutTest();">setTimeout</button>
+        <script>
+            function setTimeoutTest(){
+                var child = open("","","width=300,height=300");
+                child.alert('이 창은 3초 뒤에 종료됩니다.');
+                setTimeout(function(){
+                    child.close();
+                },2000)            
+            }
+        </script>
+        <button onclick="setIntervalTest();">setIntervalTest</button>
+        <input type="text" name="" id="check">
+        <script>
+            function setIntervalTest(){
+                var inter = setInterval(function(){
+                    var value = document.getElementById('check').value;
+                    if(value == 'no'){
+                        clearInterval(inter);
+                    }
+                    alert('JACKSON');
+                },5000)
+            }
+        </script>
+
+        <button onclick="closeWin();">closeWin</button>
+        <script>
+            function closeWin(){
+                var child = open("","","width=300,height=300");
+                setInterval(function(){
+                    child.moveTo(Math.floor(Math.random()*500),Math.floor(Math.random()*500));
+                    child.resizeTo(Math.floor(Math.random()*700),Math.floor(Math.random()*700));
+                },500);
+            }
+        </script>
+
+        <script>
+            window.onload = function(){
+                document.getElementById('container2').innerHTML = '<h2>HAHAHAHAHA</h2>';
+            };
+        </script>
+        <h3>onload 속성이용하기</h3>
+        <div id="container2"></div>
+
+        <h2>BOM객체 알아보기</h2>
+        <p>
+            대부분 정보를 전달하는 객체
+            navigator(브라우져 정보), screen(사용자 화면 정보), location(url창 정보),
+            history(사용기록정보)
+        </p>
+        <h3>
+            location객체 알아보기
+        </h3>
+        <p>
+            url창에 있는 정보를 가지고 수정할 수 있는 객체
+            특정이벤트에 의해 페이지를 변경할 때 많이 사용하는 객체
+        </p>
+        <button onclick="locationInfo();">location알아보기</button>
+        <input type="text" name="" id="addr">
+        <button onclick="moveSite();">페이지이동</button>
+        <div id="locationContent"></div>
+        <script>
+            function moveSite(){
+                var addr = document.getElementById('addr').value;
+                location.href = "http://"+addr;
+            }
+            function locationInfo(){
+                var locationContent = document.getElementById('locationContent');
+                for(let key in location){
+                    locationContent.innerHTML+=`${key} : ${location[key]} <br>`
+                }
+            }
+        </script>
+    </body>
+</html>

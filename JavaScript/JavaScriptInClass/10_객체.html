@@ -1,62 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>객체활용하기</title>
-</head>
-<body>
-    <h1>객체의 선언 및 호출</h1>
-    <script>
-        //객체 생성하기
-        //객체는 {}를 이용해서 생성이 가능함
-        var obj = {} //빈 객체 생성.
-        console.log(obj, typeof(obj));
-        obj = {
-            name : "유병승",
-            age:19,
-            height:180.5,
-            birthday:new Date(),
-            hobby:['독서','여행','코딩'],
-            toString:function(){
-                console.log(this.name, this.age, this.birthday, this.hobby);
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>객체활용하기</title>
+    </head>
+    <body>
+        <h1>객체의 선언 및 호출</h1>
+        <script>
+            //객체 생성하기 객체는 {}를 이용해서 생성이 가능함
+            var obj = {} //빈 객체 생성.
+            console.log(obj, typeof(obj));
+            obj = {
+                name: "유병승",
+                age: 19,
+                height: 180.5,
+                birthday: new Date(),
+                hobby: [
+                    '독서', '여행', '코딩'
+                ],
+                toString: function () {
+                    console.log(this.name, this.age, this.birthday, this.hobby);
+                }
             }
-        }
-        console.log(obj);
-        //각 property의 값에 접근하기
-        //접근방법 : [], . 두가지방법이 있음.
-        console.log(obj.name);
-        console.log(obj.birthday);
-        //[]
-        //.으로 접근하면 간혹가다 안 되는 경우가 있음
-        console.log(obj['age']);
-        console.log(obj['height']);
-        //배열 접근하기
-        console.log(obj.hobby[1]);
-        console.log(obj['hobby'][2]);
+            console.log(obj);
+            //각 property의 값에 접근하기 접근방법 : [], . 두가지방법이 있음.
+            console.log(obj.name);
+            console.log(obj.birthday);
+            //[] .으로 접근하면 간혹가다 안 되는 경우가 있음
+            console.log(obj['age']);
+            console.log(obj['height']);
+            //배열 접근하기
+            console.log(obj.hobby[1]);
+            console.log(obj['hobby'][2]);
 
-        //함수를 호출하려면?
-        obj.toString();
-        obj['toString']();
+            //함수를 호출하려면?
+            obj.toString();
+            obj['toString']();
 
-        //속성명에는 띄어쓰기 특수기호를 사용할 수 있을까
-        var obj2 = {
-            //test 1 : 'hahaha'; 안 됨
-            'test 1' : 'hahaha',
-            '#$%@#$' : 'jajaja',
-            $ : 'Heeloo',
-            _ : 'LLOO',
+            //속성명에는 띄어쓰기 특수기호를 사용할 수 있을까
+            var obj2 = {
+                //test 1 : 'hahaha'; 안 됨
+                'test 1': 'hahaha',
+                '#$%@#$': 'jajaja',
+                $: 'Heeloo',
+                _: 'LLOO'
+            }
+            // console.log(obj2.$); console.log(obj2.test 1) 문자열로 저장한 속성명은 []로만 접근 가능
+            // console.log(obj2['test 1']); 객체 전체를 순회하는 경우 for in문을 사용함.
+            for (var temp in obj2) {
+                console.log(temp); // key값만 출력
+                // console.log(obj2.temp); value값 출력 하지만 비추 console.log(obj2[temp]);
+            }
+            for (var temp in obj) {
+                console.log(obj[temp]);
+                if (typeof(obj[temp]) == 'function') {
+                    obj[temp]();
+                } //분기처리
+            }
 
-        }
-        console.log(obj2.$);
-        // console.log(obj2.test 1) 문자열로 저장한 속성명은 []로만 접근 가능
-        console.log(obj2['test 1']);
-        
-        //객체 전체를 순회하는 경우
-        //for in문을 사용함.
-        for(var temp in obj2){
-            console.log(temp);
-        }
-    </script>
-</body>
+            var obj3 = {
+                temp: '객체안의 객체',
+                o: {
+                    test: 1,
+                    test2: '하하'
+                }
+            }
+            for (var t in obj3) {
+                if (typeof(obj3[t]) == 'object') {
+                    for (var tt in obj3[t]) {
+                        console.log(obj3[t][tt]);
+                    }
+                }
+            }
+
+            //객체에 property 추가/ 삭제하기 property 추가하는 방법 : ., [] 새로운 property명, 값대입
+            var changeObj = {};
+            console.log(changeObj);
+            changeObj.name = "유병승";
+            changeObj["age"] = 19;
+            changeObj['hobby'] = ['공부', '코로나퇴치'];
+            console.log(changeObj);
+            //추가된 property를 삭제? 가능?? delete() 함수를 이용해서 삭제함.
+            delete(changeObj.age);
+            console.log(changeObj);
+        </script>
+        <h1>객체 배열</h1>
+        <p>여러개의 객체를 보관할 수 있는 배열</p>
+        <table id="table"></table>
+        <script>
+            var s1 = {
+                name: "김도환",
+                grade: 1,
+                gradPoint: {
+                    math: 10,
+                    eng: 20,
+                    kor: 40
+                }
+            }
+            var s2 = {
+                name: "홍지운",
+                grade: 2,
+                gradPoint: {
+                    math: 70,
+                    eng: 80,
+                    kor: 10
+                }
+            }
+            var s3 = {
+                name: "최민수",
+                grade: 2,
+                gradPoint: {
+                    math: 30,
+                    eng: 20,
+                    kor: 10
+                }
+            }
+            var students = [s1, s2, s3];
+            // students.push(s1); students.push(s2); students.push(s3);
+            console.log(students);
+
+            for (let i = 0; i < students.length; i++) {
+                // if (students[i].name == '김도환') {
+                //     for (let temp in students[i]) {
+                //         console.log(students[i][temp]);
+                //     }
+                // }
+                // if(students[i]['name'] == '김도환'){
+                    var container = document.getElementById('table');
+                    container.innerHTML += '<tr><td>' + students[i]['name'] + "</td><td>"
+                    +students[i]['grade']+"</td></tr>";
+                // }             
+            }
+        </script>
+        <h1>함수를 이용한 객체생성</h1>
+
+        <script>
+            function studentCreate(name, grade, gradePoint){
+                var obj = {
+                    name:name,
+                    grade:grade,
+                    gradePoint:gradePoint
+                };
+                return obj;
+            }
+            students.push(studentCreate('온영석',3,{kor:30,eng:40,math:50}));
+            console.log(students);
+        </script>
+        <h3>생성자를 이용해서 객체를 생성하기</h3>
+        <p>
+            new 연산자를 이용해서 객체를 생성한다는 의미
+            생성자도 결국 함수이기 떄문에 생성자함수를 만들어서 이용을 함.
+            생성자 함수는 첫글자를 대문자로 설정.
+        </p>
+        <script>
+            //생성자함수 만들기
+            function Student(name, grade, gradPoint){
+                this.name = name;
+                this.grade = grade;
+                this.gradPoint = gradPoint;
+                this.toString = function(){
+                    let gstr = " ";
+                    for(let t in this.gradPoint){
+                        gstr += this.gradPoint[t] + " ";
+                    }
+                    return this.name + " " + this.grade + gstr;
+                }
+            }
+            students.push(new Student('강범석',2,{kor:40,eng:20,math:40}));
+            console.log(students);
+            console.log(students[4]['name']);
+            console.log(students[4]['toString']());
+            console.log(Student);
+            console.log(typeof(Student));
+            console.log(typeof(students[4]));
+
+            //instanceof 예약어 특정 생성자 함수에서 생성된 객체인지 확인!
+            console.log(students[3]);//객체 생성 함수를 이용함.
+            console.log(students[4]);//생성자 함수를 이용함
+            console.log(students[3] instanceof Student);
+            console.log(students[4] instanceof Student);
+        </script>
+        <h1>캡슐화와 상속처리하기</h1>
+        <p>
+            생성함수를 이용!
+            클로저의 개념으로 함수(getter, setter)를 만듬.
+        </p>
+        <script>
+            function Member(id, pw, name, email, address){
+                // this.id = id;
+                // this.pw = pw;
+                // this.name = name;
+                // this.email = email;
+                // this.address = address;
+                var id = id;
+                var pw = pw;
+                var name = name;
+                var email = email;
+                var address = address;
+
+                this.setId = function(id1){
+                    if(id1.length<4){
+                    id = id1;
+                    }else {
+                        console.log('error');
+                    }
+                }
+                this.getId = function(){
+                    return id;
+                }
+            }
+            var m = new Member('admin', '1234', '관리자', 'admin@naver.com', '서울시');
+            m.setId('adssd');
+            console.log(m.getId());
+        </script>
+
+        <h1>상속</h1>
+        <script>
+            function Book(title, price, discountRate){
+                this.title = title;
+                this.price = price;
+                this.discountRate = discountRate;
+                this.getSalePrice = function(){
+                    return price - (price*discountRate);
+                }
+            }
+
+            Book.prototype.getSalePrice=function(){
+                return this.price-(this.price*this.discountRate+0.1);
+            }
+            var book = new Book('자바의 정석',37000,0.2);
+            console.log(book.title);
+            console.log(book.price);
+            console.log(book.discountRate);
+            console.log(book.getSalePrice());
+            // book.getSalePrice = function(){
+            //     return price - (price*discountRate);
+            // }
+            var book2 = new Book('오라클의 정석',40000,0.1);
+            console.log(book2.title);
+            console.log(book2.price);
+            console.log(book2.discountRate);
+            console.log(book2.getSalePrice());
+
+            //자바스크립트 상속처리하기
+
+            function Novel(title, price, discountRate, type){
+                this.base = Book;
+                this.base(title, price, discountRate, type);
+                this.type = type;
+            }
+            Novel.prototype=Book.prototype;
+            var n = new Novel('운수좋은날',20000,0.2,'소설');
+            console.log(n);
+            console.log(n.title);
+            console.log(n.getSalePrice());
+        </script>
+    </body>
 </html>
