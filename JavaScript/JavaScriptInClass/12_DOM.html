@@ -64,6 +64,7 @@
         function deleteImg(){
             const container = document.getElementById('imgContainer');
             container.removeChild(container.lastChild);
+            container.firstChild.remove(); //앞에것부터 지워짐
         }
         function addImg(){
             const imgcontainer = document.getElementById('imgContainer');
@@ -79,6 +80,40 @@
             for(let i = 0; i < att.length; i++){
                 console.log(tag.attributes[i]);
             }
+        }
+    </script>
+    <style>
+        .back1 {
+            background-color: lime;
+            color: ivory;
+        }
+        .back2 {
+            background-color: khaki;
+            color: lightcoral;
+        }
+    </style>
+    <h1 id="target" onclick="changeColor();" class="back1">Rclass 화이팅!</h1>
+    <script>
+        var count = 0;
+        function changeColor(){
+            var inter = setInterval(function(){
+            var t = document.getElementById('target');
+            console.log(t.className, t.classList);
+            const c = t.classList;
+            if(c.contains('back1')){
+                c.remove('back1');
+                c.add('back2');
+            }else if (c.contains('back2')){
+                c.remove('back2');
+                c.add('back1');
+            }
+            // t.setAttribute('class', 'back2');
+            count++;
+            if(count == 5){
+                clearInterval(inter);
+                count = 0;
+            }
+            },100)
         }
     </script>
 </body>

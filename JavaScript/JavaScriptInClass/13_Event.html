@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 처리하기</title>
+</head>
+<body>
+    <h1>이벤트 속성 알아보자</h1>
+    <div>
+        <input type="text" name="" id="">
+    </div>
+    <p>focus : element에 focus 되었을 때 input태그에 주로 쓰임</p>
+    <p>blur : element에 focus를 잃었을 때 input태그에 주로 쓰임</p>
+    <p>change : 객체의 내용이 변경 input/select value값이 변경된 후 발생</p>
+    <p>submit : 폼이 전송될 때(전송이 실행되기 전에 실행 그 후에 정보 전달)</p>
+    <p>reset : 폼이 취소 됐을 때</p>
+
+
+    <p>click : element 마우스로 클릭했을 때</p>
+    <p>dbclick : element 마우스로 더블클릭했을 때</p>
+    <p>mouseenter : element(범위)에 마우스가 들어왔을 때</p>
+    <p>mouseleave : element(범위)에 마우스가 벗어났을 때</p>
+    <p>mouseover : element에 마우스가 올라갔을 때</p>
+
+    <p>keydown : 키를 눌렀을 때</p>
+    <p>keyup : 키가 올라왔을 때</p>
+    <p>keypress : 눌렀다가 떨어졌을 때</p>
+
+    <p>load : 페이지가 로드 됐을 때</p>
+    <p>resize : 윈도우창 크기가 조절됐을 때</p>
+    <p>scroll : 스크롤바를 조작할 때</p>
+
+    <h2>이벤트 연결하기</h2>
+    <p>고전방식으로 연결하기</p>
+    <h3>이거 클릭하면 뭐가 변할까</h3>
+    <h3>이거 클릭하면 뭐가 변할까</h3>
+    <h3>이거 클릭하면 뭐가 변할까</h3>
+    <h3>이거 클릭하면 뭐가 변할까</h3>
+    <h3>이거 클릭하면 뭐가 변할까</h3>
+    <h3>이거 클릭하면 뭐가 변할까</h3>
+
+    <table>
+        <tr>
+            <td>이거 변경</td>
+            <td><button class="change">변경!</button></td>
+        </tr>
+        <tr>
+            <td>이거 변경</td>
+            <td><button class="change">변경!</button></td>
+        </tr>
+        <tr>
+            <td>이거 변경</td>
+            <td><button class="change">변경!</button></td>
+        </tr>
+    </table>
+    <script>
+        let t1 = document.getElementsByTagName('h3');
+        let bnts = document.getElementsByClassName('change');
+        for(let i = 0; i < bnts.length; i++){
+            bnts[i].onclick = function(e){
+                console.log(e.target);
+                console.log(e.target.parentElement.children);
+                console.log(e.target.parentElement.previousElementSibling);
+                e.target.parentElement.previousElementSibling.appendChild(document.createTextNode('이거 추가'));
+                //replaceChild
+                //innerHTML
+                //nextElementSibling 
+            }
+        }
+        console.dir(t1);
+        for(let i = 0; i < t1.length; i++){
+            t1[i].onmouseenter=function(e){
+                t1[i].innerHTML="이벤트로 바꾼 문구";
+            }
+        }
+        let t2 = document.querySelectorAll('td>button');
+        
+        // t1.onmouseenter = function(e){
+        //     console.log(e);
+        //     t1.innerHTML = "이벤트로 바꾼 문구";
+        // }
+    </script>
+
+    <h3>표준이벤트 적용</h3>
+    <p>표준이벤트 적용은 addEventListener()함수를 이용해서 처리함</p>
+    비밀번호 <input type="password" id="pw"><br>
+    비밀번호 확인 <input type="password" id="pwck"><span id="result"></span>
+    <script>
+        let pwck = document.getElementById('pwck');
+        let pass = document.getElementById('pw');
+        function focusTest(e){
+            alert('비밀번호 8글자 이상 특수문자를 포함해주세요');
+            pass.removeEventListener('focus',focusTest);
+        }
+        pass.addEventListener('focus',focusTest)
+        pwck.addEventListener("keyup",function(e){
+            const pw = document.getElementById('pw').value.trim();
+            const result = document.getElementById('result');
+            if(e.target.value.trim()==pw){
+                result.style.color = 'green';
+                result.innerHTML = '비밀번호가 일치합니다'
+            }else {
+                result.style.color = 'red';
+                result.innerHTML = '비밀번호가 일치하지 않습니다.'
+            }
+        });
+    </script>
+
+    <h3>기본 이벤트 차단하기</h3>
+    <p>
+        a태그, input submit
+    </p>
+    <a id="move" onclick="prevent(event);" href="http://www.naver.com">asdasdasdasdas</a>
+    <form action="">
+        <input type="text" name="name" id="name">
+        <input type="password" name="pw" id="pwpw">
+        <input type="submit" value="전송" onclick="return checkData();">
+    </form>
+    <script>
+        function checkData(){
+            let name = document.getElementById('name');
+            let pw = document.getElementById('pwpw');
+            if(name.value.length < 3){
+                alert('이름을 3글자 이상 입력하세요');
+                return false;
+            }
+            else if(pw.value.length < 8){
+                alert('비밀번호 8글자 이상 입력하세요');
+                return false;
+            }else {
+            return true
+            }
+        }
+        function prevent(e){
+            e.preventDefault();//기본이벤트 차단하기
+        }
+    </script>
+    <style>
+        .div1 {
+            width: 400px;
+            height: 400px;
+            border:1px red solid;
+        }
+        .div2 {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            top: 30px;
+            left: 30px;
+            border: 1px lightgreen solid;
+        }
+        .div3 {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            top: 30px;
+            left: 30px;
+            border: 1px crimson solid;
+        }
+    </style>
+    <div class="div1">
+        <div class="div2">
+            <div class="div3"></div>
+        </div>
+    </div>
+    <script>
+        let divs = document.querySelectorAll('.div1, .div1 div');
+        console.log(divs);
+        for(let i = 0; i < divs.length; i++){
+            divs[i].addEventListener("click",function(e){
+                alert(`${divs[i].className}클릭함`); //bubbling 효과
+                e.stopPropagation(); //bubbling 효과 방지
+            })
+        }
+    </script>
+</body>
+</html>
