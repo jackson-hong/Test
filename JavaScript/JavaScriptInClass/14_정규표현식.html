@@ -6,6 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>정규표현식 활용</h1>
+    <p>정규표현식은 자바스크립트 RegExp객체를 이용해서 활용함</p>
+    <script>
+        //RegExp객체생성
+        //2가지가 있음
+        //1. new 연산자를 이용 : var reg = new RegExp(표현식);
+        //2. //연산자 이용 var reg = /표현식/;
+
+        var reg = new RegExp('script');
+        reg = /script/;
+        reg = /[0-9][0-9][0-9]/g;
+        console.log(reg.test('script'));
+        console.log(reg.exec('javascript jquery 100'));
+    </script>
 </body>
 </html>
