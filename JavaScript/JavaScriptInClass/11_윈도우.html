@@ -104,6 +104,13 @@
         <input type="text" name="" id="addr">
         <button onclick="moveSite();">페이지이동</button>
         <div id="locationContent"></div>
+        <p>location객체의 함수를 이용해서 페이지 이동하기</p>
+        <button onclick="assignTest();">assign이동</button>
+        <button onclick="location.assign('http://youtube.com')">assign이동</button>
+        <button onclick="location.replace('http://naver.com')">replace이동</button> 
+        <!-- replace는 이전 주소를 남기지 않아서 뒤로가기가 안 됨 ex)로그아웃, 로그인 -->
+        <button onclick="location.reload()">새로고침</button>
+        <!-- 페이지가 자동으로 갱신되게 할 때 쓰임 -->
         <script>
             function moveSite(){
                 var addr = document.getElementById('addr').value;
@@ -115,6 +122,37 @@
                     locationContent.innerHTML+=`${key} : ${location[key]} <br>`
                 }
             }
+            function assignTest(){
+                location.assign('http://www.iei.or.kr');
+            }
         </script>
+        <h1>navigator 알아보기</h1>
+        <p>client 브라우져에 대한 정보를 가지고 있는 객체</p>
+        <button onclick="navigatorInfo();">navigator 알아보기</button>
+        <div id="naviInfo"></div>
+        <script>function navigatorInfo(){
+            var area = document.getElementById('naviInfo');
+            for(let v in navigator){
+            area.innerHTML += v + " : " + navigator[v] + '<br>';
+            }
+            navigator.geolocation.getCurrentPosition(function(position){
+                console.log('dd?');
+                area.innerHTML = "위도 : " + position.coords.latitude + "경도 : " + position.coords.longitude;
+            })
+        }
+        </script>
+        <h3>screen 객체 알아보기</h3>
+        <button onclick="screenInfo();">스크린정보</button>
+        <div id="screenInfo"></div>
+        <script>
+            function screenInfo(){
+                var area =document.getElementById('screenInfo');
+                for(let v in screen){
+                    area.innerHTML += `${v} : ${screen[v]} <br>`;
+                }
+            }
+        </script>
+        <button onclick="history.back();">뒤로가기</button>
+        <button onclick="history.forward();">앞으로가기</button>
     </body>
 </html>
