@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 이용하기</title>
+    <!-- cdn방식으로 이용하기 -->
+    <!-- <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        // console.log($("h1"));
+        // $(document).ready(function(){
+        //     //자바스크립트의 onload와 동일한 내용.
+        //     console.log($("h1"));
+        // });
+        //간단하게 onload 적용하는 방법
+        // $(function(){
+        //     console.log($("h1"));
+        // });
+        //jQuery에서는 onload이벤트에 여러 함수가 실행되게 할 수 있다.
+    </script>
+    
+</head>
+<body>
+    <h1 class="jack">jQuery란 무엇인가</h1>
+    <h1 class="jack"><p>jack</p></h1>
+    <h1 class="jack">123123</h1>
+    <script>
+        $("h1>p").html("이것이 jquery");
+    </script>
+    <h1>jQuery 선택자 알아보기</h1>
+    <p>기본 선택자, id, class, 태그 선택자 알아보기.</p>
+    <h1 id="test">test 아이디</h1>
+    <h2 class="a">a 클래스 h2</h2>
+    <h3 class="a">a 클래스 h3</h3>
+    <p class="a">a 클래스 p</p>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        console.log($("#test"));
+        console.log($(".a"));
+        console.log($("li"));
+        $("#test").css("backgroundColor","coral");
+        $(".a:first").css("backgroundColor","blue");
+        $("li, .a").css("color","green");
+    </script>
+</body>
+</html>
