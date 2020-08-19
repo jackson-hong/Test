@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+        아이디 <input type="text" name="userId" id="userId"> <br>
+        패스워드 <input type="password" name="password" id="password"> <br>
+        패스워드확인 <input type="password" name="pwck" id="pwck"> <br>
+        회원이름 <input type="text" name="name" id="name"> <br>
+        <button value="회원가입" onclick="return validate();">회원가입</button>
+
+    <script>
+        function validate(){
+            //아이디 첫글자 영소문자, 4~12자로 만들어지고
+            //반드시 한개 이상의 숫자가 포함
+            let reg = /^[a-z][0-9]{1,}[a-z]{2,}/;
+
+            //비밀번호 8-15자리 이내 숫자, 문자, 특수기호 포함
+            //이름 한글 2~4
+
+            let name = document.getElementById('name');
+            let id = document.getElementById('userId');
+            let pw = document.getElementById('pw');
+
+            let regName = /[가-힣]{2,4}/;
+            if(!regName.test(name.value)){
+                alert("이름은 한글로 2~4글자로 입력해주세요!");
+                return false;
+            }
+            let regId = /^[a-z][a-zA-Z0-9]{3,11}$/;
+            regId = /^[a-z](?=.*?[\d])[a-z\dA-Z]{3,11}/; //숫자까지 한번에
+            if(!regId.test(id.value)){
+                alert('첫 글자가 영소문자이고 4~12의 영문자, 숫자 입력해야합니다');
+                return false;
+            }
+
+            let regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).*$/;
+            if(!regPw.test(pw.value)){
+                alert("8~15자리 이내 숫자, 문자, 특수기호 포함");
+                return false;
+            }
+            //regexr.com
+        }
+    </script>
+</body>
+</html>
