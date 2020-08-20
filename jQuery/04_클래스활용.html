@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스활용하기</title>
+    <script src="jquery-3.5.1.min.js"></script>
+    <style>
+        .a0{
+            color: aqua;
+        }
+        .a1 {
+            color: red;
+        }
+        .a2 {
+            color: yellow;
+        }
+        .a3 {
+            color:green;
+        }
+        .a4 {
+            background-color:coral;
+        }
+    </style>
+</head>
+<body>
+    <h1>클래스이용하기</h1>
+    <div id="container">
+        <h1>h1</h1>
+        <p>p1</p>
+        <p>p2</p>
+        <span>span</span>
+        <h2>h2</h2>
+    </div>
+    <button onclick="addClass1();">클래스 추가</button>
+    <button onclick="removeClass1()">클래스 지우기</button>
+    <!-- toggle 적용하기 -->
+    <button onclick="toggleClass1();">토글적용하기</button>
+</body>
+<script>
+    function toggleClass1(){
+        $("#container").children().toggleClass("a0 a4");
+    }
+    function removeClass1(){
+        $('#container').children().each(function(i,v){
+            $(v).removeClass('a0');
+        });
+    }
+    function addClass1(){
+        //요소에 클래스 추가하기ß
+        // $('#container').children().each(function(i,v){
+        //     // if(i%2==0){
+        //     // $(v).addClass("a0 a4");
+        //     // }else {
+        //     //     $(v).addClass("a0");
+        //     // }
+        //     $(v).addClass(function(n){
+        //         return "a"+n;
+        //     });
+        // });
+        $("#container").children().addClass(function(n){
+            return "a"+n;
+        });
+    }
+</script>
+</html>

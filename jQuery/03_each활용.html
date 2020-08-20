@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>each활용하기</title>
+    <script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <script>    
+        var jq = $.noConflict(); //$표시를 jq로 바꿈
+    </script>
+    <h1>each함수 활용</h1>
+    <div id="container">
+        <h1>item-0</h1>
+        <h1>item-1</h1>
+        <h1>item-2</h1>
+        <h1>item-3</h1>
+        <h1>item-4</h1>
+    </div>
+    <script>
+        jq(function(){
+            console.log(jq("#container>h1")); //배열!
+            console.log(jq("#container>h1")[0]);
+            let el = jq("#container>h1");
+            console.log(el[1]);
+            for(let i = 0; i < el.length; i++){
+                console.log(el[i]);
+            }
+            jq("#container>h1").each(function(index, item){
+                console.log(item);
+                let bgcolor = "";
+                let color = "";
+                switch(index){
+                    case 0: bgcolor = 'red'; color = 'yellow';break;
+                    case 1: bgcolor = 'orange'; color = 'white';break;
+                    case 2: bgcolor = 'yellow'; color = 'green';break;
+                    case 3: bgcolor = 'green'; color = 'white';break;
+                }
+                jq(item).css({"backgroundColor":bgcolor, "color":color});
+            });
+        });
+            //each함수는 일반적인 배열에서도 활용이 가능
+            let arr = ["유병승", "김도환", "유혜지", "김가남생축","강범석"];
+            //for(let i)
+            jq.each(arr, function(index,item){
+                console.log(index,item);
+            });
+    </script>
+
+    <h3>객체 병합하기, 추가하기</h3>
+    <p>
+        jq.extend() : 여러개의 객체를 하나로 합칠 때 사용
+    </p>
+    <button onclick="addObj();">객체 합치기</button>
+    <script>
+        function addObj(){
+            let obj={
+                name:'유병승',
+                age:19
+            };
+            let obj2 = {
+                height:180.5,
+                weight:65.5
+            }
+            jq.extend(obj,obj2);
+            console.log(obj);
+            jq.extend(obj, {nickname:'Jackson',level:0});
+            console.log(obj);
+            console.log(obj2);
+        }
+    </script>
+    <h3>$변수 충돌방지하기</h3>
+    <p>$내용을 다른 변수명으로 변경 : $.noConflict</p>
+    
+</body>
+</html>
