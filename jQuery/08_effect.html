@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>effect함수 이용하기</title>
+        <script src="jquery-3.5.1.min.js"></script>
+    </head>
+    <body>
+        <h1>show/hide</h1>
+        <p>특정 요소를 보이고 사라지게 하는 함수</p>
+        <button id="s">보여주기</button>
+        <button id="h">사라지게</button>
+        <button id="t">토글이용하기</button>
+        <img src="junyeol.jpg" alt="" class="img1">
+        <script>
+            $(function () {
+                $("#t").click(function () {
+                    $(".img1").toggle(0);
+                })
+                $("#s").click(function () {
+                    $(".img1").show(1000);
+                })
+                $("#h").click(function () {
+                    $(".img1").hide(1000);
+                })
+            })
+        </script>
+
+        <h1>슬라이딩 이용하기</h1>
+        <div>첫번째 메뉴</div>
+        <p class="contents">내용1</p>
+        <div>두번째 메뉴</div>
+        <p class="contents">내용2</p>
+        <div>세번째 메뉴</div>
+        <p class="contents">내용3</p>
+        <div>네번째 메뉴</div>
+        <p class="contents">내용4</p>
+        <div>다섯번째 메뉴</div>
+        <p class="contents">내용5</p>
+        <style>
+            div {
+                width: 300px;
+                height: 30px;
+                background-color: yellowgreen;
+                color: aqua;
+                border-radius: 20px;
+                text-align: center;
+                border: 1px skyblue solid;
+            }
+            p {
+                display: none;
+                width: 300px;
+                height: 200px;
+                border: 1px solid gray;
+            }
+        </style>
+        <script>
+            let flag = true;
+            $(function () {
+                $("div").hover(function () {
+
+                    $(this).next().slideToggle(100);
+
+                    // if (flag) {
+                    //     $(this)
+                    //         .next()
+                    //         .slideDown(500);
+                    //     flag = false;
+                    // } else {
+                    //     $(this)
+                    //         .next()
+                    //         .slideUp(500);
+                    //     flag = true;
+                    // }
+                })
+            })
+        </script>
+
+        <h2>fade()</h2>
+        <button id="in">fadein</button>
+        <button id="out">fadeout</button>
+
+        <img id="img2" src="junyeol.jpg" alt="" width="200" height="200">
+        <script>
+            $(function(){
+                $("#img2").hover(function(){
+                    $(this).fadeTo(1000,1);
+                },
+                function(){
+                    $(this).fadeTo(1000,0.3);
+                });
+
+                $("#in").click(function(){
+                    $("#img2").fadeIn(1000);
+                });
+                $("#out").click(function(){
+                    $("#img2").fadeOut(1000);
+                });
+                
+            })
+        </script>
+    </body>
+</html>

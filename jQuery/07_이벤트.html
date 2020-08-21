@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트</title>
+    <script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <h3>이벤트객체</h3>
+    <p>이벤트 관련 정보를 담고 있는 객체</p>
+    <button onclick="eventTest(event);">이벤트</button>
+    <script>
+        function eventTest(e){
+            console.log(e.target);
+            console.log(e.path); //찾을 때
+            // 여기서 this 는 window
+        }
+    </script>
+
+    <h3>이벤트 연결하기</h3>
+    <p>
+        on("이벤트명", 이벤트 처리 함수) : 함수를 이용해서 이벤트를 요소와 연결함
+    </p>
+    <div id="onTest">연결하기</div>
+    <div id="manyEvent">다수의 이벤트 연결하기</div>
+    <script>
+        $("#onTest").on("click",function(e){
+            console.log(e);
+            //on으로 이벤트를 연결하면 this => 연결한 객체
+            console.log(this);
+            $(this).css({"backgroundColor":"gold",
+            "border":"2px green solid"});
+        })
+        //객체를 이용한 다중 이벤트 처리
+        $("#manyEvent").on({
+            "click":function(){
+                $(this).css("color","red").html("클릭함!");
+            },
+            "mouseleave":function(){
+                $(this).css("backgroundColor","yellow").html("마우스 나감");
+            },
+            "dblclick":function(){
+                alert("더블클릭함");
+            }
+        })
+    </script>
+
+    <h3>이벤트 객체에 데이터 넣기</h3>
+    <p>이벤트 연결시에 필요한 데이터를 event객체에 보관하고 사용할 수 있음</p>
+
+    <img src="minsik.jpg" width="300" height="100" class="test">
+    <img src="minsik.jpg" width="300" height="100" class="test">
+    <img src="minsik.jpg" width="300" height="100" class="test">
+    <img src="minsik.jpg" width="300" height="100" class="test">
+    <img src="minsik.jpg" width="300" height="100" class="test">
+    <img src="minsik.jpg" width="300" height="100" class="test">
+    <script>
+        $(".test").each(function(i,v){
+            $(v).on("click",{number:i},function(e){
+            // console.log(e.data); // 객체를 불러오기
+            console.log(e.data["number"]); //key값으로 불러오기
+            //연결시에 데이터를 넣어 놓는다}
+            })
+        })
+    </script>
+
+    <h3>one() : 함수</h3>
+    <p>한번만 실행하는 이벤트 연결할 때 사용하는 함수</p>
+    <h4 id="justone">한번만 클릭할 수 있음</h4>
+    <script>
+        $("#justone").one("click",function(e){
+            alert('한번만 실행됨!');
+        })
+    </script>
+
+    <h3>간단한 이벤트 처리</h3>
+
+    <script>
+        $(function(){
+            $(window).resize(function(e){
+                console.log(e);
+                console.log(window.innerWidth);
+            });
+        });
+    </script>
+
+    <form action="">
+        <input type="text" name="userId" id="userId">
+        <br>
+        <input type="password" name="pw" id="pw">
+        <input type="password" name="" id="pwck">
+        <select name="title" id="title">
+            <option value="제목">제목</option>
+            <option value="내용">내용</option>
+            <option value="작성자">작성자</option>
+        </select>
+    </form>
+
+    <script>
+
+        $(function(){
+            $("#title").change(function(){
+                console.log($(this).val());
+            });
+            $("#pwck").keyup(function(e){
+                const pw = $("#pw").val();
+                const pwck = $(this).val();
+                if(pwck.length>4&&pw != pwck){
+                    const sp = $("<span>").html("비밀번호 일치하지 않습니다").css("color","red");
+                    $(this).after(sp);
+                    $(this).val("");
+                    $(this).focus();
+                }
+            })
+            $("#userId").focus(function(e){
+                // alert("경고!")
+                $(this).css("backgroundColor","black")
+            })
+            $("#userId").blur(function(e){
+                // alert("경고!")
+                $(this).css("backgroundColor","white")
+            })
+        });
+    </script>
+</body>
+</html>

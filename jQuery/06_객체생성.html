@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <h3>객체 생성하기</h3>
+    <p>
+        객체를 생성하는 방법
+        1. html() 함수를 이용해서 문자열로 넣는 방법
+        2. jQuery방식 : $("&lt;태그명>&gt;")
+        3. document 객체이용해서 처리 document.createElement();
+    </p>
+    <div id="container"></div>
+    <input type="text" name="" id="tag">
+    <button onclick="addElement();">태그추가하기</button>
+    <script>
+        function addElement(){
+            const tag = $("#tag").val(); //input에 대한 값을 가져올 때 jQuery에서는 val()함수를 이용함
+            // js : .value
+            console.log(tag);
+            //jquery를 이용해서 객체를 생성하기
+            console.log($("<p>"));
+            //객체를 생성 후 페이지에 있는 다른 element에 자식, 형제(같은레벨)로 연결
+            let newTag = $("<"+tag+">");
+            newTag.css({
+                "font-size":"20px",
+                "text-shadow":"3px 3px 3px gray",
+                "color":"lime"
+            });
+            newTag.html("PPPPPPPPPP");
+            // $("#container").append($("<"+tag+">").html("내가 처음 만든 태그 객체").css("color","blue")); //자식으로 넣기
+            $("#container").append(newTag);
+        }
+    </script>
+
+    <h3>생성된 객체를 페이지에 추가하는 방법</h3>
+    <p>
+        특정요소의 자식으로 추가하는 방법
+        1. append / appendTo : 특정요소의 맨 마지막 자식으로 추가하는 함수
+        2. prepend / prependTo : 특정요소의 맨 처음 자식으로 추가하는 함수
+        특정요서의 같은 레벨에 추가하는 방법
+        1. after / insertAfter : 특정요소의 뒤에 추가하는 함수
+        2. before / insertBefore : 특정요소의 앞에 추가하는 함수
+    </p>
+    <div id="container2"></div>
+    <input type="text" name="" id="tag2"><br>
+    <button onclick="appendTest();">append</button>
+    <button onclick="prependTest();">prepend</button>
+    <br>
+    <button onclick="beforeTest();">before</button>
+    <button onclick="afterTest();">after</button>
+    <p>1</p>
+    <p class="test">2</p>
+    <p>3</p>
+    <p class="test">4</p>
+    <p class="test">5</p>
+    <button onclick="beforeTest2();">다중값에 넣기</button>
+    <style>
+        #container2{
+            border:1px red solid;
+        }
+    </style>
+    <script>
+        function beforeTest2(){
+            $(".test").each(function(i,v){
+                if(i==0){
+                    $(v).before($("<h2>").html("새로추가"));
+                }
+            })
+        }
+        function beforeTest(){
+            //선택된 element의 앞에 배치 (같은 레벨)
+            const v = $("#tag2").val();
+            const tag = $("<"+v+">").html("before");
+            $("#container2").before(tag);
+        }
+        function afterTest(){
+            //선택된 element의 앞에 배치 (같은 레벨)
+            const v = $("#tag2").val();
+            const tag = $("<"+v+">").html("after");
+            $("#container2").after(tag);
+        }
+        function prependTest(){ //맨 앞에
+            const v = $("#tag2").val();
+            let t = $("<"+v+">").html("prepend");
+            // $("#container2").prepend(t);
+            //prependTo
+            $("#container2").prependTo(t);
+        }
+        function appendTest(){ //맨 밑에
+            const v=$("#tag2").val();
+            let t = $("<"+v+">").html("append");
+            // $("#container2").append(t);
+            // $("#container2").appendTo(t);
+            // t 한테 container2를 이동시킴
+            t.appendTo("#container2");
+        }
+    </script>
+
+    <h3>append, prepend, after, before</h3>
+    <p>
+        새로 생성된 객체를 추가,
+        있는 객체를 선택하면 -> 이동!
+    </p>
+    <div id="container3">
+        <h3 id="1">1</h3>
+        <h3>2</h3>
+        <h3>3</h3>
+        <h3>4</h3>
+    </div>
+    <button onclick="changePosition();">위치이동하기</button>
+    <style>
+        #container3{
+            border: 1px red solid;
+        }
+    </style>
+    <script>
+        function changePosition(){
+            $("#1").appendTo($("#container3"));
+            $("#container3").before($("#1"));
+        }
+    </script>
+    <div id="imgcontainer">
+        <img src="minsik.jpg" alt="" width="200" height="200" id="1p">
+        <img src="kombucha.png" alt="" width="200" height="200" id="2p">
+        <img src="junyeol.jpg" alt="" width="200" height="200" id="3p">
+    </div>
+    <button onclick="rotateTest();">돌아라</button>
+    <script>
+        function rotateTest(){
+            setInterval(() => {
+                // $("#imgcontainer").children().eq(2).prependTo($("#imgcontainer"));
+                $("#imgcontainer").append($("img").first());
+            }, 1000);
+        }
+    </script>
+    <h3>객체를 복사, 제거 함수</h3>
+    <p>
+        clone() : 요소를 복사하는 기능
+        매개변수 : true|false -> 그 요소에 지정되어있는 event까지 복사여부
+    </p>
+    <button id="clone">복사하기</button>
+    <div id="clone-test">
+        <div id="item1" class="item">
+            <span>안녕</span>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            //복사이벤트 처리하기
+            $("#clone").click(function(){
+                console.log($("#item1").clone());
+                // $("#clone-test").append($("#item1").clone());//default = false
+                $("#clone-test").append($("#item1").clone(true));
+            });
+            $("#item1").hover(function(){
+                $(this).addClass("lime");
+                $(this).children("span").addClass("added")
+            },
+            function(){
+                $(this).removeClass("lime")
+                $(this).children('span').removeClass("added");
+            })
+        })
+    </script>
+    <style>
+        .item{
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            margin: 5px 5px 0 0 ;
+            text-align: center;
+            line-height: 100px;
+            background-color: yellowgreen;
+        }
+        .item span {
+            font-size:24px;
+            font-weight: bold;
+            color: white;
+        }
+        .lime{
+            background-color: lime;
+        }
+        .added {
+            color: black;
+        }
+    </style>
+    <h3>요소삭제하기</h3>
+    <p>
+        empty() : 모든자식요소를 삭제
+        remove() : 요소를 잘라내기 - 사라지면서 리턴, 연관된 이벤트 삭제
+        detach() : 요소를 잘라내기, 연관된 이벤트 유지
+    </p>
+    <button onclick="emptyTest();">empty</button>
+    <button onclick="removeTest();">remove</button>
+    <button onclick="detachTest();">detach</button>
+    <div id="remove-test" class="box">
+        <div id="item2" class="item">
+            <span>안녕~</span>
+        </div>
+    </div>
+    <div id="result" class="box"></div>
+    <script>
+        $("#item2").hover(function(){
+            $(this).addClass("lime");
+        },function(){
+            $(this).removeClass("lime");
+        })
+        function emptyTest(){ //후손 지우기
+            const r = $("#remove-test").empty(); //후손을 지움
+            $("#result").html(r);//리턴되는 값은 자기자신
+        }
+        function removeTest(){ //자기 자신을 지움
+            const r = $("#item2").remove(); //지워지면서 객체를 반환
+            $("#result").html(r); //연결된 이벤트는 지워지고 태그 자체만 집어넣음
+        }
+        function detachTest(){ //자기 자신 지우고 이벤트까지 리턴
+            const r = $("#item2").detach();
+            $("#result").html(r); // 이벤트까지 같이 가져감
+        }
+    </script>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            padding: 5px 10px 15px 10px;
+            margin: 10px;
+        }
+        #remove-test{
+            border:2px solid red;
+        }
+        #result {
+            border: 2px dashed blue;
+        }
+    </style>
+    <table>
+        <tr>
+            <td>
+            <input type="file" name="upload" id="upload">
+            </td>
+            <td>
+                <button onclick="addFile();">추가</button>
+                <button onclick="deleteFile(event);">삭제</button>
+            </td>
+    </tr>
+    </table>
+    <script>
+        function addFile(){
+            // $("td").first().append($("#upload").clone());
+            const tr = $("table>tbody>tr").first().clone(true);
+            console.log(tr);
+            $("table").append(tr);
+        }
+        function deleteFile(e){
+            // $("table>tbody>tr").last().remove();
+            console.log($(e.target));
+            const tr = $(e.target).parents("tr");
+            // const tr = $(this); 얘는 window를 받음
+            if($("table>tbody>tr".length!=1)){
+                $(tr).remove();
+            }
+            console.log(tr);
+        }
+    </script>
+</body>
+</html>
